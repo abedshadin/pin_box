@@ -50,19 +50,27 @@ document.getElementById('verify-pin').addEventListener('click',function(){
 
     const typeNumberField = document.getElementById('typeNumber');
     const typedNumber = typeNumberField.value;
-
-    if(typedNumber == genPin){
+    const leftElement = document.getElementById('left-attempt');
+    if(typedNumber === genPin){
         document.getElementById('match').classList.remove('d-none');
         document.getElementById('wrong').classList.add('d-none');
+        document.getElementById('action-bar').style.display = 'none';
     }
     else{
         document.getElementById('wrong').classList.remove('d-none');
         document.getElementById('match').classList.add('d-none');
+
+        
+        const leftElementString = leftElement.innerText;
+        const leftElementNumber = parseInt(leftElementString);
+        const remain = leftElementNumber - 1;
+        leftElement.innerText = remain;
+        if(leftElementNumber == 1){
+            document.getElementById('verify-pin').setAttribute('disabled',true);
+        }
     }
 
-    const leftElement = document.getElementById('left-attempt');
-    const leftElementString = leftElement.innerText;
-    const leftElementNumber = parseInt(leftElementString);
-    console.log(leftElementNumber);
+   
+
 
 })
